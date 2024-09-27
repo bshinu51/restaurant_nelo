@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  api_service:
+    build:
+      context: .
+    environment:
+      NODE_ENV: development
+    command: >
+      sh -c "
+      npx prisma migrate deploy && 
+      npm install &&
+      npm run dev-build"
+    ports:
+      - "3000:3000"

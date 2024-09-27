@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:15
+    container_name: postgres_db
+    ports:
+      - "3001:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: mydatabase
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  api_service:
+    build:
+      context: .
+    environment:
+      DATABASE_URL: postgres://postgres:postgrespassword@database:5432/mydatabase
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    volumes:
+      - .:/app
+    env_file:
+      - ./.env
+
+volumes:
+  db_data:
