@@ -8,7 +8,7 @@ Restaurant
 
 ### Run the Docker Desktop application
 
-## Dev mode
+## Dev mode Installtion
 
 ### Environment setup
 - Copy the env file to save as `.env` by running following command
