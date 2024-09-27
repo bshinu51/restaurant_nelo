@@ -4,13 +4,24 @@ Restaurant
 
 ## Pre-requisite
 
-### Install Docker Desktop on you windows or mac laptop
+### Docker
+- Follow instruction here to download the Docker Desktop application
+[Docker Desktop Installation](https://www.docker.com/products/docker-desktop/)
+- Run the Docker Desktop application so that we can run the docker application below
 
-### Run the Docker Desktop application
+### Postman (Testing purpose)
+- Follow the instruction here to install postman
+[Postman Installation](https://www.postman.com/downloads/)
+- Now without registering open PostMan Lightweight API client
 
 ## Dev mode Installtion
 
 ### Environment setup
+- Clone the github repo by running (This assumes that you have git installed)
+`git clone https://github.com/bshinu51/restaurant_nelo.git`
+
+- CD into the `restaurant_nelo` folder
+
 - Copy the env file to save as `.env` by running following command
 `cp sample.env .env`
 
