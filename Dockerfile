@@ -8,8 +8,6 @@ COPY . .
 ARG NODE_ENV
 ENV NODE_ENV=$NODE_ENV
 
-RUN /app/bin/prisma-generate.sh
-
 EXPOSE 3000
 
-CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"development\" ]; then npm run dev-build; else npm run build && npm run start; fi"]
+CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"development\" ]; then npm run dev:build; else npm run build && npm run start; fi"]

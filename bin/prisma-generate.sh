@@ -7,4 +7,7 @@ else
   npm install
 fi
 
-npx prisma generate
+npx prisma migrate dev --name init
+npx prisma generate --schema=./prisma/schema.prisma
+
+# ./load-data.sh

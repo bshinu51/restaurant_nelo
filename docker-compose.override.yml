@@ -8,8 +8,8 @@ services:
       NODE_ENV: development
     command: >
       sh -c "
-      npx prisma migrate deploy && 
+      npx prisma migrate deploy --schema=./prisma/schema.prisma &&
       npm install &&
-      npm run dev-build"
+      npm run dev:build"
     ports:
-      - "3000:3000"
+      - '3000:3000'

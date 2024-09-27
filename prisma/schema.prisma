@@ -8,8 +8,65 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
+model diner {
+  email               String                       @id
+  name                String
+  dietaryRestrictions diner_dietary_restriction[]
+  reservations        reservation_diner[]
+}
+
+model dietary_restriction {
+  id           Int                              @id @default(autoincrement())
+  name         String                           @unique
+  diners       diner_dietary_restriction[]
+  endorsements restaurant_endorsement[]
+}
+
+model diner_dietary_restriction {
+  dinerId             String
+  restrictionId       Int
+  diner               diner                      @relation(fields: [dinerId], references: [email])
+  dietaryRestriction  dietary_restriction        @relation(fields: [restrictionId], references: [id])
+  @@id([dinerId, restrictionId])
+}
+
+model restaurant {
+  id              Int                           @id @default(autoincrement())
+  name            String
+  tables          table[]
+  endorsements    restaurant_endorsement[]
+}
+
+model restaurant_endorsement {
+  restaurantId       Int
+  restrictionId      Int
+  restaurant         restaurant                 @relation(fields: [restaurantId], references: [id])
+  dietaryRestriction dietary_restriction        @relation(fields: [restrictionId], references: [id])
+  @@id([restaurantId, restrictionId])
+}
+
+model table {
+  id            Int           @id @default(autoincrement())
+  restaurantId  Int
+  capacity      Int
+  restaurant    restaurant    @relation(fields: [restaurantId], references: [id])
+  reservations  reservation[]
+}
+
+model reservation {
+  id              Int               @id @default(autoincrement())
+  tableId         Int
+  reservationTime DateTime
+  table           table             @relation(fields: [tableId], references: [id])
+  diners          reservation_diner[]
+  endTime         DateTime
+  @@unique([tableId, reservationTime])
+}
+
+model reservation_diner {
+  reservationId   Int
+  dinerId         String
+  reservation     reservation     @relation(fields: [reservationId], references: [id])
+  diner           diner           @relation(fields: [dinerId], references: [email])
+  @@id([reservationId, dinerId])
 }
