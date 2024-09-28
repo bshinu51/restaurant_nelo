@@ -81,7 +81,7 @@ app.post('/reservations', async (req: Request, res: Response) => {
 
 app.get('/diners', async (req: Request, res: Response) => {
   try {
-    // logic to reserve restaurant
+    // logic to add more diners
     return res.status(200).json({ diners: ['Hello'] })
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while fetching users' })
